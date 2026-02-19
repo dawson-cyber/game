@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Gourmet - Restaurant</title>
+    <title>Le Gourmet - Restaurant Africain</title>
     <style>
         * {
             margin: 0;
@@ -53,7 +53,6 @@
 
         .cart-icon {
             position: relative;
-            cursor: pointer;
         }
 
         .cart-count {
@@ -112,7 +111,6 @@
             background: white;
             color: #333;
             font-weight: 600;
-            cursor: pointer;
             border: 1px solid #ddd;
         }
 
@@ -132,7 +130,6 @@
             background: white;
             border: 1px solid #ddd;
             padding: 15px;
-            cursor: pointer;
         }
 
         .product-image {
@@ -180,31 +177,16 @@
             color: white;
             border: none;
             padding: 5px 10px;
-            cursor: pointer;
             font-size: 12px;
         }
 
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-        }
-
-        .modal.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
+            position: relative;
             width: 500px;
+            margin: 40px auto;
+            background: white;
             padding: 20px;
+            border: 1px solid #ddd;
         }
 
         .modal-header {
@@ -220,7 +202,6 @@
             background: none;
             border: none;
             font-size: 24px;
-            cursor: pointer;
         }
 
         .modal-product-image {
@@ -279,7 +260,6 @@
             background: white;
             color: #c41e1e;
             font-size: 16px;
-            cursor: pointer;
         }
 
         .quantity-number {
@@ -293,24 +273,14 @@
             border: none;
             padding: 10px;
             width: 100%;
-            cursor: pointer;
             font-weight: 600;
         }
 
         .cart-panel {
-            position: fixed;
-            top: 0;
-            right: -400px;
             width: 400px;
-            height: 100%;
+            margin: 20px;
             background: white;
-            border-left: 1px solid #ddd;
-            z-index: 1500;
-            transition: right 0.3s;
-        }
-
-        .cart-panel.open {
-            right: 0;
+            border: 1px solid #ddd;
         }
 
         .cart-header {
@@ -327,13 +297,12 @@
             border: none;
             color: white;
             font-size: 24px;
-            cursor: pointer;
         }
 
         .cart-items {
-            height: calc(100% - 180px);
-            overflow-y: auto;
             padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .cart-item {
@@ -375,23 +344,18 @@
             height: 20px;
             border: 1px solid #ddd;
             background: white;
-            cursor: pointer;
         }
 
         .cart-item-remove {
             color: #999;
             font-size: 11px;
             margin-left: 10px;
-            cursor: pointer;
         }
 
         .cart-footer {
             padding: 15px;
             border-top: 1px solid #ddd;
             background: #f8f8f8;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
         }
 
         .cart-total {
@@ -408,24 +372,12 @@
             border: none;
             padding: 10px;
             width: 100%;
-            cursor: pointer;
             font-weight: 600;
-        }
-
-        .checkout-section {
-            display: none;
-            padding: 100px 0 40px;
-            background: #f8f8f8;
-            min-height: 100vh;
-        }
-
-        .checkout-section.active {
-            display: block;
         }
 
         .checkout-container {
             width: 500px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: white;
             padding: 30px;
             border: 1px solid #ddd;
@@ -470,7 +422,6 @@
             padding: 10px;
             border: 1px solid #ddd;
             text-align: center;
-            cursor: pointer;
         }
 
         .payment-method.selected {
@@ -484,25 +435,13 @@
             border: none;
             padding: 15px;
             width: 100%;
-            cursor: pointer;
             font-weight: 600;
             margin-top: 15px;
         }
 
-        .confirmation-section {
-            display: none;
-            padding: 100px 0 40px;
-            background: #f8f8f8;
-            min-height: 100vh;
-        }
-
-        .confirmation-section.active {
-            display: block;
-        }
-
         .confirmation-container {
             width: 500px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: white;
             padding: 40px;
             border: 1px solid #ddd;
@@ -536,7 +475,6 @@
             color: white;
             border: none;
             padding: 10px 20px;
-            cursor: pointer;
             margin-top: 15px;
         }
 
@@ -545,6 +483,7 @@
             color: white;
             padding: 40px 50px 20px;
             width: 100%;
+            margin-top: 40px;
         }
 
         .footer-content {
@@ -573,141 +512,328 @@
             text-align: center;
             color: #999;
         }
+
+        /* Sections pour la démo */
+        .demo-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #fff;
+            border: 2px dashed #c41e1e;
+        }
+
+        .demo-title {
+            background: #c41e1e;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <!-- PARTIE 1: NAVIGATION -->
     <nav class="main-nav">
         <div class="logo">
             LE GOURMET
-            <span>Restaurant</span>
+            <span>Restaurant Africain</span>
         </div>
         <div class="nav-links">
-            <a href="#" onclick="showSection('home')">Accueil</a>
-            <a href="#" onclick="showSection('menu')">Menu</a>
-            <a href="#" onclick="showSection('contact')">Contact</a>
+            <a href="#">Accueil</a>
+            <a href="#">Menu</a>
+            <a href="#">Contact</a>
         </div>
-        <div class="cart-icon" onclick="toggleCart()">
+        <div class="cart-icon">
             🛒
-            <span class="cart-count" id="cartCount">0</span>
+            <span class="cart-count">3</span>
         </div>
     </nav>
 
-    <div id="home">
-        <div class="hero">
-            <div>
-                <h1>Le Gourmet</h1>
-                <p>Commandez en ligne</p>
-            </div>
+    <!-- PARTIE 2: HERO SECTION -->
+    <div class="hero">
+        <div>
+            <h1>Le Gourmet</h1>
+            <p>Commandez en ligne - Livraison dans toute l'Afrique</p>
         </div>
     </div>
 
-    <div id="menu" class="container">
+    <!-- PARTIE 3: MENU AVEC CATÉGORIES ET PRODUITS -->
+    <div class="container">
         <h2 class="section-title">Notre Menu</h2>
         
+        <!-- Catégories -->
         <div class="menu-categories">
-            <button class="category-btn active" onclick="filterMenu('all')">Tous</button>
-            <button class="category-btn" onclick="filterMenu('burgers')">Burgers</button>
-            <button class="category-btn" onclick="filterMenu('salades')">Salades</button>
-            <button class="category-btn" onclick="filterMenu('pizzas')">Pizzas</button>
-            <button class="category-btn" onclick="filterMenu('boissons')">Boissons</button>
+            <button class="category-btn active">Tous</button>
+            <button class="category-btn">Burgers</button>
+            <button class="category-btn">Salades</button>
+            <button class="category-btn">Pizzas</button>
+            <button class="category-btn">Boissons</button>
         </div>
 
-        <div class="products-grid" id="productsGrid"></div>
-    </div>
-
-    <div class="cart-panel" id="cartPanel">
-        <div class="cart-header">
-            <h3>Votre Panier</h3>
-            <button class="close-cart" >×</button>
-        </div>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total</span>
-                <span id="cartTotal">0.00€</span>
+        <!-- Grille produits -->
+        <div class="products-grid">
+            <!-- Burger 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-badge">POPULAIRE</span>
+                </div>
+                <div class="product-info">
+                    <h3>Classic Burger</h3>
+                    <p>Bœuf, salade, tomate</p>
+                    <div class="product-footer">
+                        <span class="product-price">7 500 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
             </div>
-            <button class="checkout-btn">Commander</button>
+            <!-- Burger 2 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Double Cheese</h3>
+                    <p>Double bœuf, cheddar</p>
+                    <div class="product-footer">
+                        <span class="product-price">9 500 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Burger 3 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Chicken Deluxe</h3>
+                    <p>Poulet, bacon</p>
+                    <div class="product-footer">
+                        <span class="product-price">8 500 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Burger 4 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Veggie Burger</h3>
+                    <p>Steak végétal</p>
+                    <div class="product-footer">
+                        <span class="product-price">7 000 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Salade 1 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Salade César</h3>
+                    <p>Poulet, parmesan</p>
+                    <div class="product-footer">
+                        <span class="product-price">6 500 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Salade 2 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Salade Méditerranéenne</h3>
+                    <p>Feta, olives</p>
+                    <div class="product-footer">
+                        <span class="product-price">7 500 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Pizza 1 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Margherita</h3>
+                    <p>Tomate, mozzarella</p>
+                    <div class="product-footer">
+                        <span class="product-price">6 500 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Pizza 2 -->
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3>Reine</h3>
+                    <p>Jambon, champignons</p>
+                    <div class="product-footer">
+                        <span class="product-price">8 000 FCFA</span>
+                        <button class="add-to-cart-btn">+</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="modal" >
-        <div class="modal-content">
+    <!-- PARTIE 4: EXEMPLE DE MODAL (DÉTAILS PRODUIT) -->
+    <div class="demo-section">
+        <div class="demo-title">EXEMPLE: Modal Détails Produit</div>
+        <div class="modal">
             <div class="modal-header">
-                <h3>Détails</h3>
-                <button class="close-modal" >×</button>
+                <h3>Classic Burger</h3>
+                <button class="close-modal">×</button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-product-image"></div>
+            <p class="modal-product-desc">Bœuf, salade, tomate, oignon, sauce maison</p>
+            
+            <div class="options-section">
+                <div class="options-title">Pain</div>
+                <div class="option-item">
+                    <input type="radio" name="bread" checked> Brioché <span class="option-price">+0 FCFA</span>
+                </div>
+                <div class="option-item">
+                    <input type="radio" name="bread"> Complet <span class="option-price">+300 FCFA</span>
+                </div>
+            </div>
+
+            <div class="options-section">
+                <div class="options-title">Suppléments</div>
+                <div class="option-item">
+                    <input type="checkbox"> Double fromage <span class="option-price">+600 FCFA</span>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox"> Bacon <span class="option-price">+900 FCFA</span>
+                </div>
+            </div>
+
+            <div class="quantity-selector">
+                <button class="quantity-btn">-</button>
+                <span class="quantity-number">1</span>
+                <button class="quantity-btn">+</button>
+            </div>
+
+            <button class="add-to-cart-modal">Ajouter • 7 500 FCFA</button>
         </div>
     </div>
 
-    <div class="checkout-section">
+    <!-- PARTIE 5: EXEMPLE DE PANIER -->
+    <div class="demo-section">
+        <div class="demo-title">EXEMPLE: Panier</div>
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h3>Votre Panier</h3>
+                <button class="close-cart">×</button>
+            </div>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <div class="cart-item-image"></div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">Classic Burger</div>
+                        <div class="cart-item-price">7 500 FCFA</div>
+                        <div class="cart-item-quantity">
+                            <button class="cart-qty-btn">-</button>
+                            <span>2</span>
+                            <button class="cart-qty-btn">+</button>
+                            <span class="cart-item-remove">Supprimer</span>
+                        </div>
+                    </div>
+                    <div>15 000 FCFA</div>
+                </div>
+                <div class="cart-item">
+                    <div class="cart-item-image"></div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">Salade César</div>
+                        <div class="cart-item-price">6 500 FCFA</div>
+                        <div class="cart-item-quantity">
+                            <button class="cart-qty-btn">-</button>
+                            <span>1</span>
+                            <button class="cart-qty-btn">+</button>
+                            <span class="cart-item-remove">Supprimer</span>
+                        </div>
+                    </div>
+                    <div>6 500 FCFA</div>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span>21 500 FCFA</span>
+                </div>
+                <button class="checkout-btn">Commander</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PARTIE 6: FORMULAIRE CLIENT -->
+    <div class="demo-section">
+        <div class="demo-title">EXEMPLE: Formulaire Client</div>
         <div class="checkout-container">
             <h3 class="checkout-title">Finaliser la commande</h3>
             
             <div class="form-group">
                 <label class="form-label">Nom complet</label>
-                <input class="form-input" type="text"
+                <input class="form-input" type="text" value="Amadou Diallo">
             </div>
 
             <div class="form-group">
                 <label class="form-label">Email</label>
-                <input class="form-input" type="email">
+                <input class="form-input" type="email" value="amadou.diallo@gmail.com">
             </div>
 
             <div class="form-group">
                 <label class="form-label">Téléphone</label>
-                <input class="form-input" type="tel"
+                <input class="form-input" type="tel" value="+221 77 123 45 67">
             </div>
 
             <div class="form-group">
                 <label class="form-label">Adresse</label>
-                <input class="form-input" type="text" >
+                <input class="form-input" type="text" value="Route de Ouakam">
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Code postal</label>
-                    <input class="form-input" type="text">
+                    <input class="form-input" type="text" value="12500">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Ville</label>
-                    <input class="form-input" type="text">
+                    <input class="form-input" type="text" value="Dakar">
                 </div>
             </div>
 
             <h4>Mode de paiement</h4>
             <div class="payment-methods">
                 <div class="payment-method selected">Carte</div>
-                <div class="payment-method" >Espèces</div>
-                <div class="payment-method"</div>
+                <div class="payment-method">Orange Money</div>
+                <div class="payment-method">Wave</div>
             </div>
 
-            <button class="confirm-order-btn" >Confirmer</button>
+            <button class="confirm-order-btn">Confirmer la commande</button>
         </div>
     </div>
 
-    <div class="confirmation-section" id="confirmationSection">
+    <!-- PARTIE 7: CONFIRMATION -->
+    <div class="demo-section">
+        <div class="demo-title">EXEMPLE: Confirmation</div>
         <div class="confirmation-container">
             <div class="check-circle">✓</div>
             <h3>Commande confirmée !</h3>
             <p>Merci pour votre commande</p>
 
-            <div class="order-number" id="orderNumber">#CMD-001</div>
+            <div class="order-number">#CMD-123</div>
 
             <div style="text-align: left; margin: 15px 0; padding: 10px; background: #f8f8f8">
-                <p>Retrait : 20-30 min</p>
-                <p>Total : <span >0FCFA</span></p>
+                <p>📍 Livraison : 30-45 minutes</p>
+                <p>💰 Total : 21 500 FCFA</p>
             </div>
 
-            <button class="back-home">Retour</button>
+            <button class="back-home">Retour à l'accueil</button>
         </div>
     </div>
 
+    <!-- PARTIE 8: FOOTER -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Le Gourmet</h3>
-                <p>Restaurant français</p>
+                <p>Restaurant africain - Cuisine internationale</p>
             </div>
             <div class="footer-section">
                 <h3>Horaires</h3>
@@ -716,12 +842,13 @@
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <p>123 rue de Paris, 75001 Paris</p>
-                <p>01 23 45 67 89</p>
+                <p>📍 Route de Ouakam, Dakar, Sénégal</p>
+                <p>📞 +221 33 123 45 67</p>
+                <p>✉️ contact@legourmet.sn</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 Le Gourmet</p>
+            <p>© 2024 Le Gourmet - Tous droits réservés</p>
         </div>
     </footer>
 </body>
