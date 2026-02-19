@@ -618,7 +618,7 @@
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
             <h3>Votre Panier</h3>
-            <button class="close-cart" onclick="toggleCart()">×</button>
+            <button class="close-cart" >×</button>
         </div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
@@ -626,63 +626,63 @@
                 <span>Total</span>
                 <span id="cartTotal">0.00€</span>
             </div>
-            <button class="checkout-btn" onclick="proceedToCheckout()">Commander</button>
+            <button class="checkout-btn">Commander</button>
         </div>
     </div>
 
-    <div class="modal" id="productModal">
+    <div class="modal" >
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Détails</h3>
-                <button class="close-modal" onclick="closeModal()">×</button>
+                <button class="close-modal" >×</button>
             </div>
-            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-body"></div>
         </div>
     </div>
 
-    <div class="checkout-section" id="checkoutSection">
+    <div class="checkout-section">
         <div class="checkout-container">
             <h3 class="checkout-title">Finaliser la commande</h3>
             
             <div class="form-group">
                 <label class="form-label">Nom complet</label>
-                <input class="form-input" type="text" id="nom">
+                <input class="form-input" type="text"
             </div>
 
             <div class="form-group">
                 <label class="form-label">Email</label>
-                <input class="form-input" type="email" id="email">
+                <input class="form-input" type="email">
             </div>
 
             <div class="form-group">
                 <label class="form-label">Téléphone</label>
-                <input class="form-input" type="tel" id="telephone">
+                <input class="form-input" type="tel"
             </div>
 
             <div class="form-group">
                 <label class="form-label">Adresse</label>
-                <input class="form-input" type="text" id="adresse">
+                <input class="form-input" type="text" >
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Code postal</label>
-                    <input class="form-input" type="text" id="codepostal">
+                    <input class="form-input" type="text">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Ville</label>
-                    <input class="form-input" type="text" id="ville">
+                    <input class="form-input" type="text">
                 </div>
             </div>
 
             <h4>Mode de paiement</h4>
             <div class="payment-methods">
-                <div class="payment-method selected" onclick="selectPayment('carte')">Carte</div>
-                <div class="payment-method" onclick="selectPayment('especes')">Espèces</div>
-                <div class="payment-method" onclick="selectPayment('apple')">Apple Pay</div>
+                <div class="payment-method selected">Carte</div>
+                <div class="payment-method" >Espèces</div>
+                <div class="payment-method"</div>
             </div>
 
-            <button class="confirm-order-btn" onclick="confirmOrder()">Confirmer</button>
+            <button class="confirm-order-btn" >Confirmer</button>
         </div>
     </div>
 
@@ -695,11 +695,11 @@
             <div class="order-number" id="orderNumber">#CMD-001</div>
 
             <div style="text-align: left; margin: 15px 0; padding: 10px; background: #f8f8f8">
-                <p>📍 Retrait : 20-30 min</p>
-                <p>💰 Total : <span id="confirmTotal">0.00€</span></p>
+                <p>Retrait : 20-30 min</p>
+                <p>Total : <span >0FCFA</span></p>
             </div>
 
-            <button class="back-home" onclick="backToHome()">Retour</button>
+            <button class="back-home">Retour</button>
         </div>
     </div>
 
@@ -724,273 +724,5 @@
             <p>© 2024 Le Gourmet</p>
         </div>
     </footer>
-
-    <script>
-        const products = {
-            burgers: [
-                { id: 1, name: "Classic Burger", description: "Bœuf, salade, tomate", price: 12.90, category: "burgers", popular: true },
-                { id: 2, name: "Double Cheese", description: "Double bœuf, cheddar", price: 15.90, category: "burgers" },
-                { id: 3, name: "Chicken Deluxe", description: "Poulet, bacon", price: 13.90, category: "burgers" },
-                { id: 4, name: "Veggie Burger", description: "Steak végétal", price: 14.50, category: "burgers" }
-            ],
-            salades: [
-                { id: 5, name: "Salade César", description: "Poulet, parmesan", price: 11.90, category: "salades" },
-                { id: 6, name: "Salade Méditerranéenne", description: "Feta, olives", price: 12.90, category: "salades" },
-                { id: 7, name: "Bowl Buddha", description: "Quinoa, avocat", price: 13.90, category: "salades" }
-            ],
-            pizzas: [
-                { id: 8, name: "Margherita", description: "Tomate, mozzarella", price: 11.90, category: "pizzas" },
-                { id: 9, name: "Reine", description: "Jambon, champignons", price: 13.90, category: "pizzas" },
-                { id: 10, name: "4 Fromages", description: "Mozzarella, chèvre", price: 14.90, category: "pizzas" }
-            ],
-            boissons: [
-                { id: 11, name: "Coca-Cola", description: "33cl", price: 3.50, category: "boissons" },
-                { id: 12, name: "Eau minérale", description: "50cl", price: 2.50, category: "boissons" },
-                { id: 13, name: "Jus d'orange", description: "Pressé", price: 4.50, category: "boissons" }
-            ]
-        };
-
-        let cart = [];
-        let currentProduct = null;
-        let quantity = 1;
-        let paymentMethod = 'carte';
-
-        function loadProducts(category = 'all') {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = '';
-
-            let productsToShow = [];
-            if (category === 'all') {
-                for (let cat in products) {
-                    productsToShow = productsToShow.concat(products[cat]);
-                }
-            } else {
-                productsToShow = products[category] || [];
-            }
-
-            productsToShow.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.onclick = () => showProductDetails(product);
-                card.innerHTML = `
-                    <div class="product-image">
-                        ${product.popular ? '<span class="product-badge">POPULAIRE</span>' : ''}
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        <div class="product-footer">
-                            <span class="product-price">${product.price.toFixed(2)}€</span>
-                            <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${product.id})">+</button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterMenu(category) {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            loadProducts(category);
-        }
-
-        function showProductDetails(product) {
-            currentProduct = product;
-            const modal = document.getElementById('productModal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <div class="modal-product-image"></div>
-                <h3 class="modal-product-title">${product.name}</h3>
-                <p class="modal-product-desc">${product.description}</p>
-                
-                <div class="options-section">
-                    <div class="options-title">Pain</div>
-                    <div class="option-item">
-                        <input type="radio" name="bread" checked> Brioché <span class="option-price">+0€</span>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="bread"> Complet <span class="option-price">+0.50€</span>
-                    </div>
-                </div>
-
-                <div class="options-section">
-                    <div class="options-title">Suppléments</div>
-                    <div class="option-item">
-                        <input type="checkbox"> Double fromage <span class="option-price">+1€</span>
-                    </div>
-                    <div class="option-item">
-                        <input type="checkbox"> Bacon <span class="option-price">+1.50€</span>
-                    </div>
-                </div>
-
-                <div class="quantity-selector">
-                    <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
-                    <span class="quantity-number" id="productQuantity">1</span>
-                    <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
-                </div>
-
-                <button class="add-to-cart-modal" onclick="addToCartFromModal()">
-                    Ajouter • ${product.price.toFixed(2)}€
-                </button>
-            `;
-            
-            modal.classList.add('active');
-        }
-
-        function changeQuantity(delta) {
-            quantity = Math.max(1, quantity + delta);
-            document.getElementById('productQuantity').textContent = quantity;
-        }
-
-        function closeModal() {
-            document.getElementById('productModal').classList.remove('active');
-            quantity = 1;
-        }
-
-        function addToCart(productId) {
-            let product = null;
-            for (let cat in products) {
-                product = products[cat].find(p => p.id === productId);
-                if (product) break;
-            }
-            
-            if (product) {
-                const existingItem = cart.find(item => item.id === productId);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({ ...product, quantity: 1 });
-                }
-                updateCart();
-            }
-        }
-
-        function addToCartFromModal() {
-            if (currentProduct) {
-                const existingItem = cart.find(item => item.id === currentProduct.id);
-                if (existingItem) {
-                    existingItem.quantity += quantity;
-                } else {
-                    cart.push({ ...currentProduct, quantity: quantity });
-                }
-                updateCart();
-                closeModal();
-            }
-        }
-
-        function updateCart() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-
-            cartItems.innerHTML = '';
-            let total = 0;
-
-            cart.forEach(item => {
-                total += item.price * item.quantity;
-                cartItems.innerHTML += `
-                    <div class="cart-item">
-                        <div class="cart-item-image"></div>
-                        <div class="cart-item-info">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">${item.price.toFixed(2)}€</div>
-                            <div class="cart-item-quantity">
-                                <button class="cart-qty-btn" onclick="updateCartItem(${item.id}, -1)">-</button>
-                                <span>${item.quantity}</span>
-                                <button class="cart-qty-btn" onclick="updateCartItem(${item.id}, 1)">+</button>
-                                <span class="cart-item-remove" onclick="removeFromCart(${item.id})">Supprimer</span>
-                            </div>
-                        </div>
-                        <div>${(item.price * item.quantity).toFixed(2)}€</div>
-                    </div>
-                `;
-            });
-
-            cartTotal.textContent = total.toFixed(2) + '€';
-        }
-
-        function updateCartItem(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.id !== id);
-                }
-                updateCart();
-            }
-        }
-
-        function removeFromCart(id) {
-            cart = cart.filter(i => i.id !== id);
-            updateCart();
-        }
-
-        function toggleCart() {
-            document.getElementById('cartPanel').classList.toggle('open');
-        }
-
-        function selectPayment(method) {
-            paymentMethod = method;
-            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
-            event.target.classList.add('selected');
-        }
-
-        function proceedToCheckout() {
-            if (cart.length === 0) return;
-            document.getElementById('cartPanel').classList.remove('open');
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('menu').style.display = 'none';
-            document.querySelector('.footer').style.display = 'none';
-            document.getElementById('checkoutSection').classList.add('active');
-        }
-
-        function confirmOrder() {
-            const nom = document.getElementById('nom').value;
-            const email = document.getElementById('email').value;
-            const telephone = document.getElementById('telephone').value;
-            const adresse = document.getElementById('adresse').value;
-
-            if (!nom || !email || !telephone || !adresse) {
-                alert('Veuillez remplir tous les champs');
-                return;
-            }
-
-            const orderNum = 'CMD-' + Math.floor(Math.random() * 1000);
-            document.getElementById('orderNumber').textContent = '#' + orderNum;
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('confirmTotal').textContent = total.toFixed(2) + '€';
-
-            document.getElementById('checkoutSection').classList.remove('active');
-            document.getElementById('confirmationSection').classList.add('active');
-
-            cart = [];
-            updateCart();
-        }
-
-        function backToHome() {
-            document.getElementById('confirmationSection').classList.remove('active');
-            document.getElementById('home').style.display = 'block';
-            document.getElementById('menu').style.display = 'block';
-            document.querySelector('.footer').style.display = 'block';
-        }
-
-        function showSection(section) {
-            if (section === 'home') {
-                document.getElementById('home').style.display = 'block';
-                document.getElementById('menu').style.display = 'block';
-                document.querySelector('.footer').style.display = 'block';
-                document.getElementById('checkoutSection').classList.remove('active');
-                document.getElementById('confirmationSection').classList.remove('active');
-            }
-        }
-
-        loadProducts();
-    </script>
 </body>
 </html>
